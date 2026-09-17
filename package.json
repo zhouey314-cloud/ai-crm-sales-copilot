@@ -1,0 +1,12 @@
+{
+  "name": "ai-crm-sales-copilot",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A self-built AI sales workflow demo using synthetic data.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/smoke.test.mjs",
+    "serve": "python3 -m http.server 8787"
+  },
+  "license": "MIT"
+}
