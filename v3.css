@@ -1,0 +1,14 @@
+.manager-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.manager-metric{display:grid;gap:14px}
+.manager-metric strong{font-size:clamp(19px,2vw,30px);letter-spacing:-.04em}
+.manager-wide{grid-column:1/-1}
+.manager-wide h3{margin:0 0 10px}
+.manager-wide p{line-height:1.6;font-size:13px;color:var(--muted)}
+.drawer-actions{flex-wrap:wrap}
+.drawer-actions input{flex:1 1 100%;min-height:38px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:11px var(--sans)}
+.drawer-actions button:disabled{opacity:.45;cursor:not-allowed}
+.activity-timeline{padding-left:18px;color:var(--muted);font-size:11px;line-height:1.7}
+.assistant-workspace aside select{width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;padding:9px;font:11px var(--sans);margin:10px 0}
+.board{grid-template-columns:repeat(6,minmax(220px,1fr))}
+@media(max-width:1100px){.manager-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.manager-grid{grid-template-columns:1fr}.manager-wide{grid-column:auto}.board{grid-template-columns:repeat(6,240px)}}

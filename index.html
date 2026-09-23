@@ -8,6 +8,7 @@
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="/public/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./v3.css">
   <link rel="stylesheet" href="./system-font.css">
   <title>AI CRM Demo — Ethan</title>
 </head>
@@ -25,6 +26,7 @@
         <button class="nav-item" type="button" data-view="contract"><span>□</span>Contract</button>
         <button class="nav-item" type="button" data-view="delivery"><span>⇥</span>Delivery</button>
         <button class="nav-item" type="button" data-view="analytics"><span>⌁</span>Analytics</button>
+        <button class="nav-item" type="button" data-view="manager"><span>▦</span>Manager View</button>
         <button class="nav-item assistant-item" type="button" data-view="assistant"><span>✦</span>AI Assistant</button>
       </nav>
       <div class="side-footer"><span class="status-dot"></span><div><strong>Local demo</strong><small>No customer data</small></div></div>
@@ -41,9 +43,9 @@
         <div class="view-heading"><div><p class="overline">TODAY / SAMPLE WORKSPACE</p><h2 id="dashboard-title">A clear view of the next action.</h2><p>从客户、商机到交付，一条可以继续追踪的销售路径。</p></div><button class="primary-action" type="button" data-open-first>Open priority opportunity</button></div>
         <div class="metric-grid">
           <article><span>ACTIVE OPPORTUNITIES</span><strong>06</strong><small>SAMPLE DATA</small></article>
-          <article><span>QUOTES IN REVIEW</span><strong>03</strong><small>SAMPLE DATA</small></article>
-          <article><span>CONTRACTS TO SIGN</span><strong>02</strong><small>SAMPLE DATA</small></article>
-          <article><span>DELIVERIES AT RISK</span><strong>01</strong><small>SAMPLE DATA</small></article>
+          <article><span>OPEN PROPOSALS</span><strong>03</strong><small>SAMPLE DATA</small></article>
+          <article><span>WON IN DEMO</span><strong>01</strong><small>NOT REAL REVENUE</small></article>
+          <article><span>HIGH-RISK FLAGS</span><strong>01</strong><small>RULE-BASED</small></article>
         </div>
         <div class="dashboard-grid">
           <article class="panel pipeline-summary"><div class="panel-head"><div><span>PIPELINE HEALTH</span><h3>Work in progress</h3></div><button type="button" data-view-link="pipeline">View pipeline ↗</button></div><div class="stage-bars">
@@ -78,14 +80,16 @@
 
       <section class="view" data-panel="analytics"><div class="view-heading"><div><p class="overline">ANALYTICS / SAMPLE DATA</p><h2>Operational evidence, without fake growth.</h2><p>这里展示流程状态，不把示例数字包装成商业成绩。</p></div><span class="truth-chip">NO REVENUE CLAIMS</span></div><div class="analytics-grid"><article class="panel"><span>STAGE DISTRIBUTION</span><div class="horizontal-chart"><div><b>Qualified</b><i style="--w:84%"></i><em>5</em></div><div><b>Solution fit</b><i style="--w:66%"></i><em>4</em></div><div><b>Proposal</b><i style="--w:50%"></i><em>3</em></div><div><b>Negotiation</b><i style="--w:33%"></i><em>2</em></div></div></article><article class="panel"><span>REVIEW BOTTLENECKS</span><ul class="bottleneck-list"><li><b>Scope confirmation</b><span>3 SAMPLE RECORDS</span></li><li><b>Quotation approval</b><span>2 SAMPLE RECORDS</span></li><li><b>Acceptance evidence</b><span>1 SAMPLE RECORD</span></li></ul></article></div></section>
 
+      <section class="view" data-panel="manager" aria-labelledby="manager-title"><div class="view-heading"><div><p class="overline">MANAGER / FICTIONAL PIPELINE</p><h2 id="manager-title">Inspect pipeline, forecast and risk.</h2><p>金额和预测仅来自浏览器中的虚构记录，不代表收入或真实客户。</p></div><span class="truth-chip">RULE-BASED · SAMPLE DATA</span></div><div class="manager-grid" data-manager></div></section>
+
       <section class="view assistant-view" data-panel="assistant" aria-labelledby="assistant-title">
         <div class="view-heading"><div><p class="overline">AI ASSISTANT / DEMO MODE</p><h2 id="assistant-title">Use context. Keep human judgment.</h2><p>演示如何围绕 CRM 记录组织建议；不会自动发送消息或修改真实数据。</p></div><span class="truth-chip">HUMAN REVIEW REQUIRED</span></div>
-        <div class="assistant-workspace"><aside><span>CONTEXT</span><h3>Demo Opportunity 01</h3><dl><div><dt>Account</dt><dd>Sample Account 01</dd></div><div><dt>Stage</dt><dd>Qualified</dd></div><div><dt>Next action</dt><dd>Confirm solution scope</dd></div><div><dt>Source</dt><dd>Sample workspace</dd></div></dl><p>No private customer information is used in this demo.</p></aside><div class="conversation"><div class="message user-message"><span>YOU</span><p>这条商机下一步最需要确认什么？</p></div><div class="message ai-message"><span>AI · DEMO RESPONSE</span><p>优先确认三个边界：谁会使用、哪些流程必须进入第一版、如何判断这次试点通过。范围未确认前，不建议先承诺时间或进入正式报价。</p><ul><li>确认核心用户与审批人</li><li>把必须完成的流程与后续需求分开</li><li>约定可检查的验收证据</li></ul><div class="review-note">建议仅供演示 · 提交前需人工检查</div></div><div class="prompt-row"><button type="button" data-prompt="scope">Draft scope questions</button><button type="button" data-prompt="risk">List delivery risks</button><button type="button" data-prompt="followup">Prepare follow-up</button></div><form class="assistant-input" data-assistant-form><label class="sr-only" for="assistant-input">输入演示问题</label><input id="assistant-input" value="Summarize the next decision" autocomplete="off"><button type="submit">Run demo ↗</button></form></div></div>
+        <div class="assistant-workspace"><aside><span>CONTEXT</span><h3>Demo Opportunity 01</h3><dl><div><dt>Account</dt><dd>Sample Account 01</dd></div><div><dt>Stage</dt><dd>Qualified</dd></div><div><dt>Next action</dt><dd>Confirm solution scope</dd></div><div><dt>Source</dt><dd>Sample workspace</dd></div></dl><p>No private customer information is used in this demo.</p></aside><div class="conversation"><div class="message user-message"><span>RULE INPUT</span><p>建议依据选中的结构化商机记录；下方文字不发送给模型。</p></div><div class="message ai-message"><span>RULE-BASED DEMO RESPONSE</span><p>根据虚构记录显示下一步建议。</p><ul><li>Owner</li><li>Sample amount</li><li>Rule code</li></ul><div class="review-note">建议仅供演示 · 提交前需人工检查</div></div><div class="prompt-row"><button type="button" data-prompt="scope">Draft scope questions</button><button type="button" data-prompt="risk">List delivery risks</button><button type="button" data-prompt="followup">Prepare follow-up</button></div><form class="assistant-input" data-assistant-form><label class="sr-only" for="assistant-input">演示备注（不用于规则判断）</label><input id="assistant-input" value="The recommendation is selected from CRM fields" autocomplete="off"><button type="submit">Show rule suggestion ↗</button></form></div></div>
       </section>
     </main>
   </div>
 
-  <dialog class="drawer" data-drawer aria-labelledby="drawer-title"><div class="drawer-head"><div><span>SAMPLE OPPORTUNITY</span><h2 id="drawer-title" data-drawer-title>Demo Opportunity 01</h2></div><button type="button" aria-label="关闭详情" data-drawer-close>×</button></div><div class="drawer-body"><div class="drawer-truth">SAMPLE DATA · NOT A CUSTOMER RECORD</div><dl><div><dt>Account</dt><dd data-drawer-account>Sample Account 01</dd></div><div><dt>Stage</dt><dd data-drawer-stage>Qualified</dd></div><div><dt>Owner</dt><dd>Ethan</dd></div><div><dt>Next action</dt><dd data-drawer-action>Confirm solution scope</dd></div></dl><section><span>DISCOVERY NOTE</span><p>This sample record demonstrates how scope, owner and next action stay attached to one opportunity.</p></section><section><span>DELIVERY BOUNDARY</span><p>No customer, financial or contact data appears in this self-built demo.</p></section></div><div class="drawer-actions"><button type="button">Add demo note</button><button class="primary-action" type="button" data-drawer-close>Done</button></div></dialog>
+  <dialog class="drawer" data-drawer aria-labelledby="drawer-title"><div class="drawer-head"><div><span>SAMPLE OPPORTUNITY</span><h2 id="drawer-title" data-drawer-title>Demo Opportunity 01</h2></div><button type="button" aria-label="关闭详情" data-drawer-close>×</button></div><div class="drawer-body"><div class="drawer-truth">SAMPLE DATA · NOT A CUSTOMER RECORD</div><dl><div><dt>Account</dt><dd data-drawer-account>Sample Account 01</dd></div><div><dt>Stage</dt><dd data-drawer-stage>Qualified</dd></div><div><dt>Owner</dt><dd data-drawer-owner>Demo Owner A</dd></div><div><dt>Next action</dt><dd data-drawer-action>Confirm solution scope</dd></div></dl><section><span>DISCOVERY NOTE</span><p>This sample record demonstrates how scope, owner and next action stay attached to one opportunity.</p></section><section><span>DELIVERY BOUNDARY</span><p>No customer, financial or contact data appears in this self-built demo.</p></section></div><div class="drawer-actions"><button type="button">Add demo note</button><button class="primary-action" type="button" data-drawer-close>Done</button></div></dialog>
   <script src="./app.js" type="module"></script>
 </body>
 </html>

@@ -7,6 +7,8 @@ const js = await readFile(new URL("../app.js", import.meta.url), "utf8");
 assert.match(html, /SELF-BUILT DEMO/);
 assert.match(html, /SAMPLE DATA/);
 assert.match(html, /HUMAN REVIEW REQUIRED/);
+assert.match(html, /Manager View/);
+assert.match(html, /RULE-BASED DEMO RESPONSE/);
 assert.match(html, /No customer data/i);
 assert.match(js, /data-panel/);
 assert.doesNotMatch(html, /customer\.com|gmail\.com|wechat|微信号/i);
