@@ -5,7 +5,7 @@
   "description": "A self-built AI sales workflow demo using synthetic data.",
   "type": "module",
   "scripts": {
-    "test": "node tests/smoke.test.mjs",
+    "test": "node tests/smoke.test.mjs && node tests/store.test.mjs",
     "serve": "python3 -m http.server 8787"
   },
   "license": "MIT"

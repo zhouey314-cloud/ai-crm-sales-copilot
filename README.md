@@ -1,5 +1,7 @@
 # AI CRM Sales Copilot
 
+![Synthetic CRM dashboard](screenshots/crm-dashboard.webp)
+
 > Self-built product demo / synthetic data
 
 This repository is a browser-based demonstration of a connected sales
@@ -12,7 +14,7 @@ It is not a production CRM and it does not contain customer records.
 
 - Dashboard, pipeline, customer records, quotation, contract, delivery,
   analytics and assistant views.
-- A responsive static UI with sample records and review boundaries.
+- A responsive UI with sample records, local structured persistence, stage transitions and an audit trail.
 - A deterministic assistant panel showing how structured CRM context can be
   turned into a next-step suggestion.
 
@@ -20,10 +22,9 @@ It is not a production CRM and it does not contain customer records.
 
 - All records are synthetic.
 - AI responses are `MOCK / DEMO / NOT_CONNECTED` deterministic copy.
-- There is no database, authentication, model provider, email, WhatsApp or
+- There is no server database, authentication, real model provider, email, WhatsApp or
   automatic follow-up.
-- Buttons that look like create/export actions are presentation-only unless
-  the page explicitly says otherwise.
+- Advancing a stage in an opportunity drawer writes a structured JSON store to this browser's localStorage. Other create/export actions remain presentation-only unless the page explicitly says otherwise.
 
 ## Quick start
 
@@ -43,6 +44,7 @@ The demo is intentionally small:
 ```text
 index.html       views and synthetic records
 app.js           navigation, drawers and deterministic demo interactions
+crm-store.js     local structured store, audit and mock/external provider states
 style.css        layout and responsive presentation styles
 system-font.css  local/system font stack
 tests/           offline smoke checks
@@ -56,8 +58,8 @@ separate privacy review and a real storage/authentication design.
 
 ## Status and limitations
 
-Status: public demonstration project. The UI and offline smoke checks are
-verified locally. Production integrations, model quality, CRM persistence,
+Status: public demonstration project. The UI, local persistence and offline checks are
+verified locally. Production integrations, model quality, server CRM persistence,
 permissions, audit retention and deployment are not implemented.
 
 ## License

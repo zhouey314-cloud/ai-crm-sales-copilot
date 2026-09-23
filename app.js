@@ -1,11 +1,6 @@
-const opportunities = [
-  { title: "Demo Opportunity 01", account: "Sample Account 01", stage: "Qualified", action: "Confirm solution scope", updated: "Today" },
-  { title: "Demo Opportunity 02", account: "Sample Account 02", stage: "Qualified", action: "Discovery follow-up", updated: "Today" },
-  { title: "Demo Opportunity 03", account: "Sample Account 03", stage: "Solution fit", action: "Confirm user roles", updated: "Yesterday" },
-  { title: "Demo Opportunity 04", account: "Sample Account 04", stage: "Solution fit", action: "Verify integration scope", updated: "Sep 13" },
-  { title: "Demo Opportunity 05", account: "Sample Account 05", stage: "Proposal", action: "Quotation review", updated: "Sep 12" },
-  { title: "Demo Opportunity 06", account: "Sample Account 06", stage: "Negotiation", action: "Contract redline", updated: "Sep 11" },
-];
+import {load,save,advance,providers} from './crm-store.js';
+const store=load(localStorage);
+const opportunities=store.opportunities;
 
 const labels = {
   dashboard: ["Dashboard", "OVERVIEW"], pipeline: ["Pipeline", "WORKFLOW"], opportunity: ["Opportunity", "RECORDS"],
@@ -17,6 +12,12 @@ const body = document.body;
 const sidebar = document.querySelector("[data-sidebar]");
 const menuButton = document.querySelector("[data-menu]");
 const drawer = document.querySelector("[data-drawer]");
+const advanceButton=document.createElement('button');
+advanceButton.type='button';advanceButton.textContent='Advance demo stage';advanceButton.dataset.advanceStage='';
+drawer.querySelector('.drawer-actions').prepend(advanceButton);
+const auditStatus=document.createElement('p');auditStatus.dataset.auditStatus='';
+auditStatus.textContent='Demo transitions are saved in this browser only.';
+drawer.querySelector('.drawer-body').append(auditStatus);
 
 function switchView(name, updateHash = true) {
   if (!labels[name]) name = "dashboard";
@@ -36,13 +37,15 @@ function openOpportunity(index) {
   document.querySelector("[data-drawer-account]").textContent = item.account;
   document.querySelector("[data-drawer-stage]").textContent = item.stage;
   document.querySelector("[data-drawer-action]").textContent = item.action;
+  document.querySelector('[data-advance-stage]').dataset.index = String(index);
   drawer.showModal();
   body.style.overflow = "hidden";
 }
 
-document.querySelector("[data-opportunity-rows]").innerHTML = opportunities.map((item, index) => `
+function renderRows(){document.querySelector("[data-opportunity-rows]").innerHTML = opportunities.map((item, index) => `
   <tr tabindex="0" data-open-opportunity="${index}"><td><b>${item.title}</b></td><td>${item.account}</td><td><span class="status ${item.stage === "Negotiation" ? "amber" : item.stage === "Proposal" ? "green" : "gray"}">${item.stage.toUpperCase()}</span></td><td>Ethan</td><td>${item.action}</td><td>${item.updated}</td></tr>
-`).join("");
+`).join("");}
+renderRows();
 
 document.addEventListener("click", (event) => {
   const navTarget = event.target.closest("[data-view], [data-view-link]");
@@ -50,11 +53,14 @@ document.addEventListener("click", (event) => {
   const opportunityTarget = event.target.closest("[data-open-opportunity]");
   if (opportunityTarget) openOpportunity(Number(opportunityTarget.dataset.openOpportunity));
   if (event.target.closest("[data-open-first]")) openOpportunity(0);
+  if(event.target.closest('[data-advance-stage]')){
+    const i=Number(event.target.closest('[data-advance-stage]').dataset.index);
+    try{advance(store,opportunities[i].id);save(localStorage,store);renderRows();openOpportunity(i);document.querySelector('[data-audit-status]').textContent=`Audit: ${store.audit.length} reviewed transition(s) saved in this browser.`;}
+    catch(error){document.querySelector('[data-audit-status]').textContent=error.message;}
+  }
 });
 
-document.querySelectorAll("[data-opportunity-rows] tr").forEach((row) => row.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openOpportunity(Number(row.dataset.openOpportunity)); }
-}));
+document.querySelector('[data-opportunity-rows]').addEventListener('keydown',(event)=>{const row=event.target.closest('[data-open-opportunity]');if(row&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openOpportunity(Number(row.dataset.openOpportunity));}});
 
 menuButton.addEventListener("click", () => {
   const open = sidebar.classList.toggle("open");
@@ -67,7 +73,7 @@ drawer.addEventListener("close", () => { body.style.overflow = ""; });
 
 document.querySelector("[data-assistant-form]").addEventListener("submit", (event) => {
   event.preventDefault();
-  document.querySelector(".ai-message>p").textContent = "这是一条界面交互示例：建议先检查需求范围、验收方式和责任人，再由人工决定是否写入记录或对外发送。";
+  document.querySelector(".ai-message>p").textContent = providers.mock.suggest(opportunities[0]) + ' [MOCK / HUMAN REVIEW REQUIRED]';
 });
 
 document.querySelectorAll("[data-prompt]").forEach((button) => button.addEventListener("click", () => {
