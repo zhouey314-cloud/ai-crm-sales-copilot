@@ -1,5 +1,7 @@
 # AI CRM Sales Copilot
 
+**LIVE_DEMO / RULE-BASED ASSISTANT** · [Try the browser demo](https://zhouey314-cloud.github.io/ai-crm-sales-copilot/) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
+
 ![Synthetic CRM dashboard](screenshots/crm-dashboard.webp)
 
 > Self-built product demo / synthetic data
