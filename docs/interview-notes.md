@@ -1,12 +1,29 @@
-# Interview notes
+# AI CRM Sales Copilot — 面试讲述卡
 
-1. **Why?** To make ai-crm-sales-copilot an inspectable, reusable portfolio artifact.
-2. **Hardest problem?** Truthful mock provider boundary.
-3. **Why this architecture?** Keep core workflow logic separate from UI and external providers.
-4. **Where is AI?** Read the README for the precise AI or prompt boundary; do not infer model quality from tests.
-5. **What stays human?** Domain truth, final review and external publishing decisions.
-6. **How verified?** Run the documented tests and inspect their actual assertions.
-7. **Failure learned?** Local browser data is not multi-user persistence.
-8. **Redo?** Add stronger, reviewed regression cases before claiming broader reliability.
-9. **Production scale?** Add authentication, observability, durable storage and verified integrations as relevant.
-10. **My contribution?** The public repository's code, documentation and tests; avoid claiming third-party or company work as original.
+## 60 秒
+
+我做这个自建项目是为了解决“销售演示需要把商机、活动、经理预测和助手建议连成同一状态”。用 JavaScript、localStorage、GitHub Pages 做了六阶段管线、活动与本地审计、Lost 原因闸门、规则建议和加权样本预测。最难的是迁移旧状态并让各视图和刷新后的数据一致。目前证据是自动化测试与本地浏览器流程/刷新验证；8 条虚构商机。但助手是 MOCK/RULE-BASED/NOT_CONNECTED；金额不是营收；如果真实落地，下一步是多用户权限与服务端持久化、CRM/消息集成、建议质量评估和人审动作。
+
+## 3 分钟
+
+先演示核心路径：六阶段管线、活动与本地审计、Lost 原因闸门、规则建议和加权样本预测。再打开仓库中的测试与案例页，解释为什么把状态/证据留在可检查的位置。重点讲一个取舍：迁移旧状态并让各视图和刷新后的数据一致。最后明确验证范围：自动化测试与本地浏览器流程/刷新验证；8 条虚构商机；规则分支按确定性软件测试，未做 LLM 质量评测。不把演示、合成样本和生产效果混为一谈。
+
+## 10 分钟技术深挖
+
+1. 展示 README 的 Quick Start 与架构图/目录。
+2. 从一个输入走到状态变化或输出，指出 六阶段管线、活动与本地审计、Lost 原因闸门、规则建议和加权样本预测 对应的源代码。
+3. 现场说明最难问题：迁移旧状态并让各视图和刷新后的数据一致；对照测试或复现步骤。
+4. 解释失败路径及限制：助手是 MOCK/RULE-BASED/NOT_CONNECTED；金额不是营收。
+5. 用 多用户权限与服务端持久化、CRM/消息集成、建议质量评估和人审动作 说明真正上线的优先级和验收证据。
+
+## 九个常见追问
+
+1. **为什么这样设计架构？** 为了把 六阶段管线、活动与本地审计、Lost 原因闸门、规则建议和加权样本预测 的核心规则与展示/外部依赖分开，便于检查失败边界。
+2. **最难的 bug/取舍？** 迁移旧状态并让各视图和刷新后的数据一致；请指向对应测试或演示复现，避免编造线上事故。
+3. **用了什么框架？** JavaScript、localStorage、GitHub Pages。选型服务于静态或离线演示，不等同生产选型结论。
+4. **上线还差什么？** 多用户权限与服务端持久化、CRM/消息集成、建议质量评估和人审动作。
+5. **如何防止误用？** 助手是 MOCK/RULE-BASED/NOT_CONNECTED；金额不是营收；任何不可逆外部动作需人工确认。
+6. **怎么测试？** 自动化测试与本地浏览器流程/刷新验证；8 条虚构商机。先跑 README 命令，再看具体断言，不把 200 或编译当成产品验收。
+7. **AI 在哪里？** 规则分支按确定性软件测试，未做 LLM 质量评测。不要把确定性规则、提示词或可选模型接口说成已验证的 AI 效果。
+8. **哪些是 Mock？** 助手是 MOCK/RULE-BASED/NOT_CONNECTED；金额不是营收。
+9. **模型怎么评测？个人贡献是什么？** 规则分支按确定性软件测试，未做 LLM 质量评测。我负责公开仓库里可见的实现、测试和说明；未核验的业务结果与第三方工作不纳入我的贡献。
