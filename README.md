@@ -28,6 +28,10 @@ It is not a production CRM and it does not contain customer records.
 
 ## Quick start
 
+Live static preview: <https://zhouey314-cloud.github.io/ai-crm-sales-copilot/>.
+The preview stores changes only in the visitor's own browser; it is not a
+shared CRM service.
+
 Requirements: Node.js 18+ or Python 3.10+.
 
 ```bash
