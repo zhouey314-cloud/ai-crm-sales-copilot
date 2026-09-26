@@ -1,6 +1,10 @@
 # AI CRM Sales Copilot
 
+A browser-based sales workflow demo that keeps pipeline, forecast, audit and rule-based guidance on one local state model.
+
 **LIVE_DEMO / RULE-BASED ASSISTANT** · [Try the browser demo](https://zhouey314-cloud.github.io/ai-crm-sales-copilot/) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
+
+[![CI](https://github.com/zhouey314-cloud/ai-crm-sales-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/zhouey314-cloud/ai-crm-sales-copilot/actions/workflows/ci.yml)
 
 ![Synthetic CRM dashboard](screenshots/crm-dashboard.webp)
 
