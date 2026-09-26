@@ -90,9 +90,10 @@ opportunities.forEach((item,index)=>assistantSelect.add(new Option(`${item.title
 const assistantAside=$('.assistant-workspace aside');assistantAside.insertBefore(assistantSelect,assistantAside.querySelector('h3'));
 $('.ai-message>span').textContent='RULE-BASED DEMO RESPONSE';
 function renderAssistantContext(){const item=opportunities[Number(assistantSelect.value)];const dd=assistantAside.querySelectorAll('dd');assistantAside.querySelector('h3').textContent=item.title;dd[0].textContent=item.account;dd[1].textContent=item.stage;dd[2].textContent=item.action;$('.ai-message>p').textContent=providers.mock.suggest(item)+' [MOCK / HUMAN REVIEW REQUIRED]';const bullets=$$('.ai-message li');[item.owner,money(item.amount),recommend(item).code].forEach((value,i)=>bullets[i].textContent=value);}
+function renderAssistantOptions(){opportunities.forEach((item,index)=>{assistantSelect.options[index].textContent=`${item.title} · ${item.stage}`;});}
 assistantSelect.addEventListener('change',renderAssistantContext);
 const $$=selector=>document.querySelectorAll(selector);
-function renderAll(){renderRows();renderBoard();renderDashboard();renderAnalytics();renderManager();renderAssistantContext();}
+function renderAll(){renderRows();renderBoard();renderDashboard();renderAnalytics();renderManager();renderAssistantOptions();renderAssistantContext();}
 renderAll();
 document.addEventListener('click',event=>{
   const nav=event.target.closest('[data-view],[data-view-link]');if(nav)switchView(nav.dataset.view||nav.dataset.viewLink);
