@@ -20,10 +20,22 @@ export function initialStore(now=new Date().toISOString()){
     activities:[{at:day(now,daysAgo),type:'NOTE',detail:'Fictional scenario created'}]
   })),audit:[]};
 }
+function validSnapshot(saved){
+  const date=value=>typeof value==='string'&&Number.isFinite(Date.parse(value));
+  if(!saved||saved.version!==2||!Array.isArray(saved.opportunities)||!saved.opportunities.length||!Array.isArray(saved.audit))return false;
+  const ids=new Set();
+  return saved.opportunities.every(item=>{
+    if(!item||!['id','title','account','owner','action'].every(key=>typeof item[key]==='string'&&item[key].trim())||ids.has(item.id))return false;
+    ids.add(item.id);
+    return STAGES.includes(item.stage)&&typeof item.amount==='number'&&Number.isFinite(item.amount)&&item.amount>=0
+      &&typeof item.decisionMaker==='boolean'&&date(item.updatedAt)&&(item.lastProposalAt===null||date(item.lastProposalAt))
+      &&Array.isArray(item.activities)&&item.activities.every(activity=>activity&&date(activity.at)&&typeof activity.type==='string'&&typeof activity.detail==='string');
+  });
+}
 export function load(storage,now=new Date().toISOString()){
   try{
     const saved=JSON.parse(storage.getItem(KEY));
-    if(saved?.version===2&&Array.isArray(saved.opportunities)&&Array.isArray(saved.audit))return saved;
+    if(validSnapshot(saved))return saved;
     if(saved?.version===1&&Array.isArray(saved.opportunities)&&Array.isArray(saved.audit)){
       const seed=initialStore(now);
       const migrated=saved.opportunities.map((old,i)=>({
@@ -34,7 +46,8 @@ export function load(storage,now=new Date().toISOString()){
         updatedAt:seed.opportunities[i]?.updatedAt??now,
         activities:[{at:now,type:'MIGRATION',detail:'Synthetic v1 record preserved'}]
       }));
-      return {version:2,opportunities:migrated,audit:saved.audit};
+      const candidate={version:2,opportunities:migrated,audit:saved.audit};
+      if(validSnapshot(candidate))return candidate;
     }
   }catch{}
   return initialStore(now);

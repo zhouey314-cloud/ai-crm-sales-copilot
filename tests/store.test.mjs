@@ -42,3 +42,19 @@ const legacy={version:1,opportunities:[{id:'old','title':'Legacy synthetic','acc
 data.set(KEY,JSON.stringify(legacy));
 assert.equal(load(storage,NOW).opportunities[0].stage,'Qualified');
 console.log('CRM stage, persistence, migration, recommendations and manager summary passed.');
+// A syntactically valid but corrupt browser snapshot must not break rendering.
+for(const corrupt of [
+  {...initialStore(NOW),opportunities:[]},
+  {...initialStore(NOW),opportunities:[null]},
+  {...initialStore(NOW),opportunities:[{...initialStore(NOW).opportunities[0],stage:'Unknown'}]},
+  {...initialStore(NOW),opportunities:[{...initialStore(NOW).opportunities[0],amount:'oops'}]},
+  {...initialStore(NOW),opportunities:[{...initialStore(NOW).opportunities[0],activities:null}]},
+  {...initialStore(NOW),opportunities:[{...initialStore(NOW).opportunities[0],updatedAt:'not a date'}]},
+  {...initialStore(NOW),opportunities:[initialStore(NOW).opportunities[0],initialStore(NOW).opportunities[0]]},
+]){
+  const raw=JSON.stringify(corrupt);data.set(KEY,raw);
+  const recovered=load(storage,NOW);
+  assert.deepEqual(recovered,initialStore(NOW),'corrupt persisted record must recover to usable synthetic state');
+  assert.equal(data.get(KEY),raw,'recovery must not overwrite the saved snapshot');
+}
+console.log('Corrupt persisted CRM records recover without overwriting storage.');
