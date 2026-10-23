@@ -8,5 +8,8 @@
     "test": "node tests/smoke.test.mjs && node tests/store.test.mjs",
     "serve": "python3 -m http.server 8787"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=24 <25"
+  }
 }

@@ -37,7 +37,7 @@ Live static preview: <https://zhouey314-cloud.github.io/ai-crm-sales-copilot/>.
 The preview stores changes only in the visitor's own browser; it is not a
 shared CRM service.
 
-Requirements: Node.js 18+ or Python 3.10+.
+Requirements: Node.js 24 LTS for tests; Python 3.10+ for the static demo server.
 
 ```bash
 npm test
