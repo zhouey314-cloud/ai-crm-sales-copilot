@@ -1,8 +1,16 @@
 # AI CRM Sales Copilot
 
-A browser-based sales workflow demo that keeps pipeline, forecast, audit and rule-based guidance on one local state model.
+**A browser demo for one sales handoff: advance an opportunity, then check what changed.** Pipeline, audit, manager forecast and a deterministic coaching panel all read the same local opportunity state. It uses eight fictional opportunities and makes browser persistence easy to inspect.
 
-**LIVE_DEMO / RULE-BASED ASSISTANT** · [Try the browser demo](https://zhouey314-cloud.github.io/ai-crm-sales-copilot/) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
+[Open the demo](https://zhouey314-cloud.github.io/ai-crm-sales-copilot/) · [Verification checklist](docs/verification.md) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
+
+| What to verify | What to do |
+| --- | --- |
+| A stage change is explicit and persisted | Open **Pipeline** → a Lead opportunity → move it to **Qualified**. Reload, reopen it, and check the saved stage and activity timeline. Marking an opportunity **Lost** requires a reason. |
+| Manager view and coaching follow the records | Open **Manager View** for stage counts and weighted forecast; compare suggestions for a stale opportunity, an old proposal and a high-value opportunity in **Rule-based Assistant**. |
+| The project can be checked offline | Run `npm test` (Node 24) for static truth-label and structured-store checks; use `npm run serve` (Python 3.10+) for manual browser verification. [Fixed CI run](https://github.com/zhouey314-cloud/ai-crm-sales-copilot/actions/runs/39982640594) covers the former. |
+
+**Scope:** coach suggestions are rules, not model output. Changes stay in this browser. Quotation, contract and delivery views are illustrative, not live integrations or financial records.
 
 [![CI](https://github.com/zhouey314-cloud/ai-crm-sales-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/zhouey314-cloud/ai-crm-sales-copilot/actions/workflows/ci.yml)
 
